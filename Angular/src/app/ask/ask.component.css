@@ -1,0 +1,63 @@
+
+.header{
+    background-image: url('https://evergreensmallbusiness.com/wp-content/uploads/2017/11/iStock-544338034.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+   }
+  
+.contact-form .right .form-control::placeholder{
+      text-align: center;
+      color: #888;
+      font-size: 100px;
+      max-width: 400px;
+     }    
+.description{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-style: outset;
+    border-color: #C8CDC7  ;
+    background:#020D15     ;
+    border-width: 2px;
+    padding: 20px;
+    margin: 50px 50px;
+    transition: 0.3s;
+    width: 500px;
+    height: 100%;
+  }
+ 
+.description h1{
+    text-align: center;
+  
+      color: #F97300; 
+
+}
+.description p{
+ color:#666;
+ font-size: 15px;
+ width: 50%;
+ line-height: 1.5;
+
+}
+input[type=text], select {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+.description h2{
+    text-align: center;
+    font-style: italic;
+    color:white ;
+}
+.right .btn-secondary{
+    text-align: center;
+    background:  #F97300;
+    color: #fff;
+    padding:0.5em 1px;
+    width:50%;
+    border:0;
+   }

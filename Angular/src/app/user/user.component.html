@@ -1,0 +1,30 @@
+
+<div>
+  <div>
+    <h1>Login Portal</h1>
+  </div>
+  <div>
+    <form  [formGroup]="userForm" action="" method="post" role="form" (ngSubmit)="login()">
+      <div class="form-group">  
+      
+          <label for="username" style="font-size: 20px">Enter Username:</label>
+          <input    formControlName="username"  [(ngModel)]="user.userName" type="text" class="form-control" 
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }" name="firstName" id="username" placeholder="Username">
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required"></div>
+            <span style="color: red;"> User Name is required.</span> 
+             </div>
+      </div>
+        <div>
+          <label for="loginPass" style="font-size: 20px"> Enter Password:</label>
+          <input  formControlName="password"   [(ngModel)]="user.passWord"  type="password" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" name="lastName" id="password" placeholder="Password">
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required"> </div>
+            <span style="color: red;">Password  is required</span> </div>
+     
+        </div>
+        <button [disabled]="loading" type="submit" class="button" value="Submit"><span>Login </span></button>
+      </form>
+</div>
+</div>

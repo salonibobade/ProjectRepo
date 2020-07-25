@@ -1,0 +1,39 @@
+
+  <header class="header">
+    
+    <body>
+        <div class="description" >
+            <br>
+            
+            <h1> Stock View
+            <br>
+            
+            
+  
+                <div class="container">
+          
+                
+            <div class="col-lg-5 col-md-5 col-sm-10 right">
+   
+  
+    <br>
+     <h2>       Enter the amount for Market Cap
+     </h2>
+
+     
+        <input type="text" [(ngModel)]="marketcap"    class="form-control form-control-lg" placeholder="MarketCap" name="marketcap" required >
+  
+ <br>
+  <button class="button" *ngIf="marketcap"  (click)="onClick()" class="btn btn-secondary btn-block" value="Click" name="View"> View Stocks</button>
+ <br>
+ 
+  <button class="button"    (click)="showcomp()" class="btn btn-secondary btn-block" value="CompanyList" name="CompanyList"> View Saved Stocks</button>
+</div>
+
+</div>
+</h1>
+
+</div>
+
+</body>
+  
