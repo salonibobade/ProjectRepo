@@ -18,7 +18,7 @@ import pandas_datareader.data as web
 from datetime import datetime
 from iexfinance.refdata import get_symbols
 from pandas import DataFrame
-from collections import OrderedDict 
+from collections import OrderedDict
 from iexfinance.stocks import Stock
 from datetime import date, timedelta
 import os
@@ -44,7 +44,7 @@ def login():
         return response
     response = flask.jsonify({"status":"true"})
     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
-    
+   
     return response
     #return user
 
@@ -68,11 +68,11 @@ class Company:
         self.week52High = week52High
         self.week52Low = week52Low
     def toJSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__, 
+        return json.dumps(self, default=lambda o: o.__dict__,
             sort_keys=False, indent=4)
 
 class Employees(Resource):
-    
+   
     def get(self,marketcap):
         try:
             companies={}
@@ -80,10 +80,10 @@ class Employees(Resource):
             selected_companies={}
             print(type(marketcap))
             marketCap=marketcap
-            
+           
             prices = pd.DataFrame(list(get_symbols(token=token)))#pd.DataFrame(list(get_symbols()))   #datareader to read all stock symbols available
-        
-            
+       
+           
             stock_list = prices['name'].tolist()
             stock_symbol_list = prices['symbol'].tolist()
             companies=dict(zip( stock_symbol_list,stock_list,))   #companies will give you company name with stock symbol
@@ -100,20 +100,20 @@ class Employees(Resource):
                 quote_json = stock_batch.get_quote()
                 for stock_symbol in sym:
                     if(quote_json[stock_symbol]['marketCap']):
-                        fundamentals_dict_for_symbol[stock_symbol]=quote_json[stock_symbol]['marketCap']  #fundamentals_dict_for_symbol will gie you market cap and 
+                        fundamentals_dict_for_symbol[stock_symbol]=quote_json[stock_symbol]['marketCap']  #fundamentals_dict_for_symbol will gie you market cap and
                 batch_idx=batch_idx+batch_size
             print("done")
             #now finding companies relevant to market cap
-            for symbol, price in fundamentals_dict_for_symbol.items(): 
+            for symbol, price in fundamentals_dict_for_symbol.items():
                 value=(decimal.Decimal(price)-decimal.Decimal(marketCap))
                 selected_companies[symbol]=value
             print("got some companies")
             sorted_x = sorted(selected_companies.items(), key=lambda kv: kv[1])
-            sorted_dict = dict(sorted_x) 
+            sorted_dict = dict(sorted_x)
             sorted_dict=dict(itertools.islice(sorted_dict.items(), 40))
             stock_symbol_list=list(sorted_dict.keys())
             stock_batch = Stock(stock_symbol_list)
-            fundamentals_dict = {}#this will store required criteria and values 
+            fundamentals_dict = {}#this will store required criteria and values
             # Pull all the data we'll need from IEX.
             financials_json = stock_batch.get_financials()
 
@@ -122,7 +122,7 @@ class Employees(Resource):
             stats_json = stock_batch.get_key_stats(token=token)
 
             for symbol in stock_symbol_list:
-        
+       
             # Make sure we have all the data we'll need for our filters for this stock.
                 if not data_quality_good(symbol, financials_json, quote_json, stats_json):
                     continue
@@ -137,18 +137,18 @@ class Employees(Resource):
 
             Com=[]
             for stock_symbol in stock_symbol_list:
-            
+           
                 additive = Stock(stock_symbol)
                 newdata=additive.get_quote()
-                c=Company(newdata.get('symbol'),newdata.get('companyName'),newdata.get('previousClose_change'),newdata.get('change'),newdata.get('changePercent'),newdata.get('latestTime'),newdata.get('primaryExchange'),newdata.get('sector'),newdata.get('marketCap'),newdata.get('open'),newdata.get('high'),newdata.get('low'),newdata.get('close'),newdata.get('previousClose'),newdata.get('latestVolume'),newdata.get('week52High'),newdata.get('week52Low')) 
+                c=Company(newdata.get('symbol'),newdata.get('companyName'),newdata.get('previousClose_change'),newdata.get('change'),newdata.get('changePercent'),newdata.get('latestTime'),newdata.get('primaryExchange'),newdata.get('sector'),newdata.get('marketCap'),newdata.get('open'),newdata.get('high'),newdata.get('low'),newdata.get('close'),newdata.get('previousClose'),newdata.get('latestVolume'),newdata.get('week52High'),newdata.get('week52Low'))
                 Com.append(c.toJSON())
-                print(c.toJSON())   
-                
+                print(c.toJSON())  
+               
             #jsonStr = json.dumps([e.toJSON() for e in Com])
             #print(Com)      
             return jsonify(Com)
         except (iexfinance.utils.exceptions.IEXQueryError, TypeError, KeyError) as e:
-            print("ERROR"+e)
+            print("ERROR",e)
         #return  jsonStr
 def eps_good(earnings_reports):
   # This method contains logic for filtering based on earnings reports.
@@ -254,10 +254,11 @@ def filter_fundamental_df(fundamental_df):
     # This is where we remove stocks that don't meet our investment criteria.
     return sorted_dict
    
-api.add_resource(Employees, '/stockmarket/<marketcap>') # Route_1       
+api.add_resource(Employees, '/stockmarket/<marketcap>') # Route_1      
 
 
 if __name__ == '__main__':
-    app.run(port=5001,debug=True)
+    app.run(port=5000,debug=True)
+
 
 
