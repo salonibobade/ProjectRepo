@@ -1,13 +1,15 @@
-
-<div>
-  <div>
-    <h1>Login Portal</h1>
+<body>
+  
+<div class="bg">
+  <div style="margin-left: 36%;">
+    <h1 style="color: wheat; width: 26%;text-align: center;">Login Portal</h1>
   </div>
-  <div>
+  <div style="margin-left: 30%;">
     <form  [formGroup]="userForm" action="" method="post" role="form" (ngSubmit)="login()">
       <div class="form-group">  
       
-          <label for="username" style="font-size: 20px">Enter Username:</label>
+          <label for="username" style="font-size: 20px ;color: wheat;">Enter Username:</label>
+          <br>
           <input    formControlName="username"  [(ngModel)]="user.userName" type="text" class="form-control" 
           [ngClass]="{ 'is-invalid': submitted && f.username.errors }" name="firstName" id="username" placeholder="Username">
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -15,8 +17,10 @@
             <span style="color: red;"> User Name is required.</span> 
              </div>
       </div>
+
         <div>
-          <label for="loginPass" style="font-size: 20px"> Enter Password:</label>
+          <label for="loginPass" style="font-size: 20px;color: wheat;"> Enter Password:</label>
+          <br>
           <input  formControlName="password"   [(ngModel)]="user.passWord"  type="password" class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f.password.errors }" name="lastName" id="password" placeholder="Password">
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -28,3 +32,5 @@
       </form>
 </div>
 </div>
+
+</body>

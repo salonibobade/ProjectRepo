@@ -1,7 +1,7 @@
 
   <header class="header">
     
-    <body>
+    <body style="margin-left: 30%;">
         <div class="description" >
             <br>
             
@@ -21,10 +21,13 @@
      </h2>
 
      
-        <input type="text" [(ngModel)]="marketcap"    class="form-control form-control-lg" placeholder="MarketCap" name="marketcap" required >
-  
- <br>
-  <button class="button" *ngIf="marketcap"  (click)="onClick()" class="btn btn-secondary btn-block" value="Click" name="View"> View Stocks</button>
+     <select (change)="selectChangeHandler($event)">
+      <option  value="one">Small Market Cap</option>
+      <option value="two">Mid Market Cap</option>
+      <option value="three">Large Market Cap</option>
+      </select>
+ <br> <!--*-->
+   <button class="button"  (click)="onClick()" class="btn btn-secondary btn-block" value="Click" name="View"> View Stocks</button>
  <br>
  
   <button class="button"    (click)="showcomp()" class="btn btn-secondary btn-block" value="CompanyList" name="CompanyList"> View Saved Stocks</button>

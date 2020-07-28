@@ -1,5 +1,5 @@
 input[type=text], select {
-    width: 100%;
+    width: 40%;
     padding: 12px 20px;
     margin: 8px 0;
     font-size: 15px;
@@ -9,7 +9,7 @@ input[type=text], select {
     box-sizing: border-box;
   }
   input[type=password], select {
-    width: 100%;
+    width: 40%;
     padding: 12px 20px;
     margin: 8px 0;
     font-size: 15px;
@@ -24,10 +24,11 @@ input[type=text], select {
     border: none;
     color: white;
     padding: 12px 20px;
-    width: 100%;
+    width: 30%;
     transition: all 0.5s;
     cursor: pointer;
     margin: 8px 0;
+    margin-left: 60px;
   }
   
   .button span {
@@ -60,6 +61,23 @@ input[type=text], select {
   
   div {
     border-radius: 5px;
-    background-color: #f2f2f2;
+    
     padding: 20px;
+    
+  }
+  .bg {
+    /* The image used */
+    background-image: url('C:\Users\Bobde\Desktop\Assignment\Angular\src\assets\stock2.jpg');
+  
+    /* Full height */
+    
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  body
+  {
+    height: 200%;
   }
