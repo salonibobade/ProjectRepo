@@ -3,20 +3,26 @@
   <div class="col-4"  *ngFor="let  comp of company"> 
 	<div class="card">
 		<div>
+	{{comp.Ask}} <br>
+	{{comp.Bid}}
+<!-- <span>
+	{{comp.Bid}} <br>
+	{{comp.EPS}}
+</span>
 			<div class="column">
-		  	 <span style="font-weight:bold; font-size: 30px	">{{comp.companyName}}</span>
+		  	 <span style="font-weight:bold; font-size: 30px	">{{comp.symbol}}</span>
 		  	 <h3>{{comp.symbol}} </h3>
 			</div>
 			<div class="column">
-			  <span>{{comp.previousClose_change}}  </span>
-        <h3 style="color: #5BC446">{{comp.change}}   {{comp.changePercent}}</h3>
+			  <span>{{comp.oneyTarget}}  </span>
+        <h3 style="color: #5BC446">{{comp.Week52Range}}   {{comp.Ask}}</h3>
 			</div>
 			<div class="column">
 			  <button  class="button" (click)="savedata(comp)" ><span>Save</span></button>
-			</div>
+			</div> -->
 		</div>
 		
-		<div>
+		<!-- <div>
 			<span style="color: #BBB5B3">_______________________________________________________________________________________________________________________________________________________________________</span>
 		</div>
 		<div>
@@ -73,7 +79,7 @@
 		</div>	
 		<div>
 			<span style="color:#BBB5B3 ">_________________________________________________________________________________________________________________________________________________________________________________________________________</span>
-		</div>
+		</div> -->
 	</div>
 </div>
 <div class="description ">

@@ -70,7 +70,7 @@ input[type=text], select {
     background-image: url('C:\Users\Bobde\Desktop\Assignment\Angular\src\assets\stock2.jpg');
   
     /* Full height */
-    
+    height: 670px;
   
     /* Center and scale the image nicely */
     background-position: center;

@@ -1,36 +1,32 @@
-
-  <header class="header">
+<header class="header">
     
-    <body style="margin-left: 30%;">
-        <div class="description" >
-            <br>
-            
-            <h1> Stock View
-            <br>
-            
-            
-  
-                <div class="container">
+  <body>
+      <div class="description" >
+          <br>
           
-                
-            <div class="col-lg-5 col-md-5 col-sm-10 right">
-   
-  
-    <br>
-     <h2>       Enter the amount for Market Cap
-     </h2>
+          <h1> Stock View
+          <br>
+          
+          
 
-     
-     <select (change)="selectChangeHandler($event)">
-      <option  value="one">Small Market Cap</option>
-      <option value="two">Mid Market Cap</option>
-      <option value="three">Large Market Cap</option>
-      </select>
- <br> <!--*-->
-   <button class="button"  (click)="onClick()" class="btn btn-secondary btn-block" value="Click" name="View"> View Stocks</button>
- <br>
+              <div class="container">
+        
+              
+          <div class="col-lg-5 col-md-5 col-sm-10 right">
  
-  <button class="button"    (click)="showcomp()" class="btn btn-secondary btn-block" value="CompanyList" name="CompanyList"> View Saved Stocks</button>
+
+  <br>
+   <h2>       Enter the type of Market Cap
+   </h2>
+
+   
+      <input type="text" [(ngModel)]="marketcap"    class="form-control form-control-lg" placeholder="MarketCap" name="marketcap" required >
+
+<br>
+<button class="button" *ngIf="marketcap"  (click)="onClick()" class="btn btn-secondary btn-block" value="Click" name="View"> View Stocks</button>
+<br>
+
+<button class="button"    (click)="showcomp()" class="btn btn-secondary btn-block" value="CompanyList" name="CompanyList"> View Saved Stocks</button>
 </div>
 
 </div>
@@ -39,4 +35,3 @@
 </div>
 
 </body>
-  

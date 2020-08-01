@@ -11,10 +11,7 @@ export class AskComponent implements OnInit {
 
   constructor(private router: Router,private dataservice: DataService) { }
 company:Company[];
-marketcap: string ;
-
-  //event handler for the select element's change event
-  
+marketcap:string;
   ngOnInit() {
 
     

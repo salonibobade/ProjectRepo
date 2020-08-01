@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import { Company } from './company.model';
 import { Observable } from 'rxjs';
 import { User } from './user.model';
+//import { SrvRecord } from 'dns';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type':  'application/json' })
@@ -17,13 +18,12 @@ export class DataService {
   private userUrl = 'http://localhost:5000/';
   private baseUrl;
   authenticated = false;
-  marketCap:number=0;
+  marketCap:string;
   username:string="muskan"
   data:string[]
   constructor(private http: HttpClient,private router: Router) { }
-  setOption( value) { 
+  setOption(value) { 
     console.log("in setter set option "+value);
-   
     this.data = value;  
   }  
   
@@ -39,7 +39,7 @@ export class DataService {
   }  
   
   getOption() {
-    console.log("in getter giving option "+this.data);
+    // console.log("in getter giving option "+this.data);
  
     return this.data;  
   } 
@@ -62,15 +62,19 @@ export class DataService {
     this.username = value;  
   }  
   
+  
   getStocks()//: Observable<string[]>
-  { 
-     return this.http.get<string[]>("http://127.0.0.1:3000/stockmarket/"+this.getmarketCap());
- 
+  {
+    
+     
+     return this.http.get(this.userUrl+"/stockMarket?cap="+this.getmarketCap());
+
+    
   }
    saveStock(comp:Company) {
     console.log("Username will save stocks  "+this.getUsername());
     
-     console.log( "received  user "+comp.userName);
+    //  console.log( "received  user "+comp.userName);
     return this.http.post('http://localhost:8080/user-portal/stocks', comp,httpOptions).subscribe(data => {
      if (data) {
          
@@ -91,23 +95,23 @@ export class DataService {
   return this.http.get<Company[]>(`${this.baseUrl}/${this.username}`);
   
  }
- deleteStock(comp:Company) {
-  console.log("got this "+comp.userName);
-  console.log("Username will delete stocks  "+this.getUsername());
+//  deleteStock(comp:Company) {
+//   console.log("got this "+comp.userName);
+//   console.log("Username will delete stocks  "+this.getUsername());
   
- return this.http.post('http://localhost:8080/user-portal/stocks/saved',comp,httpOptions).subscribe(data => {
-  if (data) {
+//  return this.http.post('http://localhost:8080/user-portal/stocks/saved',comp,httpOptions).subscribe(data => {
+//   if (data) {
       
-      // console.log(data);
-      alert('Company deleted  succesfully');
+//       // console.log(data);
+//       alert('Company deleted  succesfully');
       
-  } 
-}, (error) => {
-  console.log('Error! ', error.text);
- alert('Company delete  unsuccesful');
-}) ;
+//   } 
+// }, (error) => {
+//   console.log('Error! ', error.text);
+//  alert('Company delete  unsuccesful');
+// }) ;
 
-}
+// }
 }
 
 

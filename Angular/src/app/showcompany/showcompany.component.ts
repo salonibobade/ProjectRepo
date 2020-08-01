@@ -21,17 +21,17 @@ company:Company[];
       });
   }
 
-  deleteData(comp:Company)
-  {
-    console.log("Username in deleting is  "+this.dataservice.getUsername());
+  // deleteData(comp:Company)
+  // {
+  //   console.log("Username in deleting is  "+this.dataservice.getUsername());
     
-    this.dataservice.deleteStock(comp);
-    this.router.navigate(['./display']).then(nav => {
-      console.log(nav); // true if navigation is successful
-    }, err => {
-      console.log(err) // when there's an error
-    });
-  }
+  //   this.dataservice.deleteStock(comp);
+  //   this.router.navigate(['./display']).then(nav => {
+  //     console.log(nav); // true if navigation is successful
+  //   }, err => {
+  //     console.log(err) // when there's an error
+  //   });
+  // }
   onClick()
   {
     this.router.navigate(['/users']).then(nav => {

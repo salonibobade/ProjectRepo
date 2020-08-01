@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import  {Company} from '../company.model'
 import { Router } from '@angular/router';
+import { stringify } from 'querystring';
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.css']
 })
 export class CompanyComponent implements OnInit {
-company:Company[]=[];
+  
+company:Company[];
 
   constructor(private dataservice:DataService,private router: Router) { 
    
@@ -22,16 +24,16 @@ company:Company[]=[];
     this.dataservice.getStocks().subscribe(
       data=>
       {
-        
-       
-        
+        console.log(data);
+         
+          
         for(let i=0;i<5;i++)
         {
-          let obj: Company = JSON.parse(data[i].toString());
-        obj.userName=this.dataservice.getUsername();
-        this.company[i]=obj;
-        this.company[i].previousClose_change=this.company[i].previousClose+this.company[i].change;
-        
+          let obj: Company = JSON.parse(data[i]);
+          console.log("ask value"+obj.Ask)
+          //obj.userName=this.dataservice.getUsername();
+          this.company[i]=obj;
+          //this.company[i].previousClose_change=this.company[i].previousClose+this.company[i].change;
         }
         
         
