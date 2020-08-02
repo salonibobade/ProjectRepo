@@ -66,10 +66,9 @@ export class DataService {
   getStocks()//: Observable<string[]>
   {
     
-     
-     return this.http.get(this.userUrl+"/stockMarket?cap="+this.getmarketCap());
-
-    
+    // return this.http.get(this.userUrl+"/stockMarket?cap="+this.getmarketCap());
+    return this.http.get(this.userUrl+"/stockMarket?cap="+this.getmarketCap());
+    // return this.http.get(this.userUrl+"/loggedin?user=Aish11&password=2345") ;
   }
    saveStock(comp:Company) {
     console.log("Username will save stocks  "+this.getUsername());
