@@ -67,7 +67,7 @@ export class DataService {
   {
     
     // return this.http.get(this.userUrl+"/stockMarket?cap="+this.getmarketCap());
-    return this.http.get(this.userUrl+"/stockMarket?cap="+this.getmarketCap());
+    return this.http.get<String[]>(this.userUrl+"/stockMarket?cap="+this.getmarketCap());
     // return this.http.get(this.userUrl+"/loggedin?user=Aish11&password=2345") ;
   }
    saveStock(comp:Company) {

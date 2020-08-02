@@ -23,16 +23,29 @@ company:Company[];
     this.dataservice.getStocks().subscribe((data:any)=> {
         
         console.log(data);
-        // for (let i in JSON.parse(data)) 
-        // {
-        //   // let u:Company = new Company();
-        //   // Object.assign(u , Company[i]);
-        //   // this.company[i] = u;
-        //   // console.log("user:" + this.company[i].Ask);
-        //   let obj: Company = JSON.parse(data[i].toString());
-        //   // obj.userName=this.dataservice.getUsername();
-        //   this.company[i]=obj;
-        // }
+         for (let i=0;i<5;i++) 
+         {
+        //   // 
+        //   // 
+        //   // 
+        //   // 
+        // console.log(data[i]);
+        // let u:Company = new Company();
+        // var com
+        // Object.assign(u , data[i]);
+        // this.company[i] = u;
+        // console.log("user:" + this.company[i].Ask);
+        // console.log(data[i]);
+        // let obj: Company = JSON.parse(data[i].toString());
+        // console.log(obj.Ask);
+        // this.company[i]=obj
+        console.log(data[i])
+        const employeeString = JSON.parse(data[i]);
+        let employee1 =employeeString;
+        console.log(employeeString)
+        this.company[i]=employee1
+          
+         }
   
     }, (error) => {
       console.log('Error! ', error.text);
