@@ -23,13 +23,13 @@ import yfinance as yf
 from pprint import pprint
 import operator
 import itertools
-
+import numpy
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
 conn = MySQLdb.connect(host="localhost", user="root", password="Sallu@1811", db="testdb")
 # demo = '60757d8382080062b8f1f1b626ddec5e'
-demo = '0603581e68c841814c771197bc1b1bc7'
+demo = 'da1bff6d9e6788fd6e40d5fabf24343a'
 
 companies = requests.get(f'https://fmpcloud.io/api/v3/stock-screener?exchange=NASDAQ&limit=3859&apikey={demo}')
 companies = companies.json()
@@ -55,8 +55,7 @@ def login():
 
 
 def filterfunc(symbol):
-    p = requests.get(
-        "https://fmpcloud.io/api/v3/ratios/" + symbol + "?period=quarter&apikey=0603581e68c841814c771197bc1b1bc7")
+    p = requests.get(f"https://fmpcloud.io/api/v3/ratios/" + symbol + "?period=quarter&apikey=da1bff6d9e6788fd6e40d5fabf24343a")
     p = p.json()
 
     if len(p)!=0:
@@ -106,12 +105,12 @@ def get():
             comp[key] = filterfunc(key)
         comp = dict(sorted(comp.items(), key=operator.itemgetter(1), reverse=True))
     elif m == "midcap":
-        for key in mid_dict.items():
+        for key,value in mid_dict.items():
             comp[key] = filterfunc(key)
         comp = dict(sorted(comp.items(), key=operator.itemgetter(1), reverse=True))
 
     elif m == "largecap":
-        for key in large_dict.items():
+        for key,value in large_dict.items():
             comp[key] = filterfunc(key)
         comp = dict(sorted(comp.items(), key=operator.itemgetter(1), reverse=True))
 
@@ -142,23 +141,76 @@ def get():
         quote = si.get_quote_table(key)
         c={}
         c['symbol']=key
-        c['oneytarget']=quote['1y Target Est']
-        c['Week52Range']=quote['52 Week Range']
-        c[' Ask']= quote['Ask']
-        c['AvgVolume']=quote['Avg. Volume']
-        c['Beta5YMonthly']=quote['Beta (5Y Monthly)']
-        c['Bid']=quote['Bid']
-        c['DayRange']=quote["Day's Range"]
-        c['EPS']=quote['EPS (TTM)']
-        c['EarningsDate']=quote['Earnings Date']
-        c['ExDividendDate']=quote['Ex-Dividend Date']
-        c['ForwardDividendYield']=quote['Forward Dividend & Yield']
-        c['MarketCap']=quote['Market Cap']
-        c['Open']=quote['Open']
-        c['PERatio']=quote['PE Ratio (TTM)']
-        c['PreviousClose']=quote['Previous Close']
-        c['QuotePrice']=quote['Quote Price']
-        c['Volume']=quote['Volume']
+        if str(quote['1y Target Est'])=='nan':
+            c['oneytarget']=""
+        else:
+            c['oneytarget']=quote['1y Target Est']
+        if str(quote['52 Week Range'])=='nan':
+            c['Week52Range']=""
+        else:
+            c['Week52Range']=quote['52 Week Range']
+        if  str(quote['Ask'])=='nan':
+            c[' Ask']=""
+        else:
+            c[' Ask']= quote['Ask']
+        if str(quote['Avg. Volume'])=='nan':
+            quote['Avg. Volume']=""
+        else:
+            c['AvgVolume']=quote['Avg. Volume']
+        if str(quote['Beta (5Y Monthly)'])=='nan':
+            quote['Beta (5Y Monthly)']=""
+        else:
+            c['Beta5YMonthly']=quote['Beta (5Y Monthly)']
+        if str(quote['Bid'])=='nan':
+            quote['Bid']=""
+        else:
+            c['Bid']=quote['Bid']
+        if str(quote["Day's Range"])=='nan':
+            c['DayRange']=""
+        else:
+            c['DayRange']=quote["Day's Range"]
+        if str(quote['EPS (TTM)'])=='nan':
+            c['EPS']=""
+        else:
+            c['EPS']=quote['EPS (TTM)']
+        if str(quote['Earnings Date'])=='nan':
+            c['EarningsDate']=""
+            print(c['EarningsDate'])
+        else:
+            c['EarningsDate']=quote['Earnings Date']
+            print(c['EarningsDate'])
+        if str(quote['Ex-Dividend Date'])=='nan':
+            c['ExDividendDate']=""
+        else:
+            c['ExDividendDate']=quote['Ex-Dividend Date']
+        if str(quote['Forward Dividend & Yield'])=='nan':
+            c['ForwardDividendYield']=""
+        else:
+            c['ForwardDividendYield']=quote['Forward Dividend & Yield']
+        if str(quote['Market Cap'])=='nan':
+            c['MarketCap']=""
+        else:
+            c['MarketCap']=quote['Market Cap']
+        if str(quote['Open'])=='nan':
+            c['Open']=""
+        else:    
+            c['Open']=quote['Open']
+        if str(quote['PE Ratio (TTM)'])=='nan':
+            c['PERatio']=""
+        else:
+            c['PERatio']=quote['PE Ratio (TTM)']
+        if str(quote['Previous Close'])=='nan':
+            c['PreviousClose']=""   
+        else:
+            c['PreviousClose']=quote['Previous Close']
+        if str(quote['Quote Price'])=='nan':
+            c['QuotePrice']=""
+        else:
+            c['QuotePrice']=quote['Quote Price']
+        if str(quote['Volume'])=='nan':
+            c['Volume']=""
+        else:
+            c['Volume']=quote['Volume']
         # c = Company(key, quote.get('1y Target Est'), quote.get('52 Week Range'), quote.get('Ask'),
         #             quote.get('Avg. Volume'), quote.get('Beta (5Y Monthly)'), quote.get('Bid'),
         #             quote.get("Day's Range"), quote.get('EPS (TTM)'), quote.get('Earnings Date'),
@@ -166,12 +218,12 @@ def get():
         #             quote.get('Open'), quote.get('PE Ratio (TTM)'), quote.get('Previous Close'), quote.get('Price'),
         #             quote.get('Volume'))
         # Com.append(c.toJSON())
-        Com.append(c)
+        Com.append(json.dumps(c))
         # print(c.toJSON())
     print(Com)
     # response = flask.jsonify({"status": "true"})
     # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
-    response = flask.jsonify(json.dumps(Com))
+    response = flask.jsonify(Com)
     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
     # return jsonify(json.dumps(Com))
     return response
