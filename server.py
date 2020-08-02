@@ -29,7 +29,7 @@ api = Api(app)
 CORS(app)
 conn = MySQLdb.connect(host="localhost", user="root", password="Sallu@1811", db="testdb")
 # demo = '60757d8382080062b8f1f1b626ddec5e'
-demo = 'e7f173c50162f8521dd22b2d7ef6e1d5'
+demo = '0603581e68c841814c771197bc1b1bc7'
 
 companies = requests.get(f'https://fmpcloud.io/api/v3/stock-screener?exchange=NASDAQ&limit=3859&apikey={demo}')
 companies = companies.json()
@@ -56,7 +56,7 @@ def login():
 
 def filterfunc(symbol):
     p = requests.get(
-        "https://fmpcloud.io/api/v3/ratios/" + symbol + "?period=quarter&apikey=e7f173c50162f8521dd22b2d7ef6e1d5")
+        "https://fmpcloud.io/api/v3/ratios/" + symbol + "?period=quarter&apikey=0603581e68c841814c771197bc1b1bc7")
     p = p.json()
 
     if len(p)!=0:
@@ -119,21 +119,62 @@ def get():
     print(comp)
     comp = dict(itertools.islice(comp.items(), 5))
     Com = []
+    
     for key, value in comp.items():
+        symbol = str
+        oneyTarget = str
+        Week52Range = str
+        Ask = str
+        AvgVolume = str
+        Beta5YMonthly = str
+        Bid = str
+        DayRange = str
+        EPS = str
+        EarningsDate = str
+        ExDividendDate = str
+        ForwardDividendYield = str
+        MarketCap = str
+        Open = str
+        PERatio = str
+        PreviousClose = str
+        QuotePrice = str
+        Volume = str
         quote = si.get_quote_table(key)
-
-        c = Company(key, quote.get('1y Target Est'), quote.get('52 Week Range'), quote.get('Ask'),
-                    quote.get('Avg. Volume'), quote.get('Beta (5Y Monthly)'), quote.get('Bid'),
-                    quote.get("Day's Range"), quote.get('EPS (TTM)'), quote.get('Earnings Date'),
-                    quote.get('Ex-Dividend Date'), quote.get('Forward Dividend & Yield'), quote.get('Market Cap'),
-                    quote.get('Open'), quote.get('PE Ratio (TTM)'), quote.get('Previous Close'), quote.get('Price'),
-                    quote.get('Volume'))
+        c={}
+        c['symbol']=key
+        c['oneytarget']=quote['1y Target Est']
+        c['Week52Range']=quote['52 Week Range']
+        c[' Ask']= quote['Ask']
+        c['AvgVolume']=quote['Avg. Volume']
+        c['Beta5YMonthly']=quote['Beta (5Y Monthly)']
+        c['Bid']=quote['Bid']
+        c['DayRange']=quote["Day's Range"]
+        c['EPS']=quote['EPS (TTM)']
+        c['EarningsDate']=quote['Earnings Date']
+        c['ExDividendDate']=quote['Ex-Dividend Date']
+        c['ForwardDividendYield']=quote['Forward Dividend & Yield']
+        c['MarketCap']=quote['Market Cap']
+        c['Open']=quote['Open']
+        c['PERatio']=quote['PE Ratio (TTM)']
+        c['PreviousClose']=quote['Previous Close']
+        c['QuotePrice']=quote['Quote Price']
+        c['Volume']=quote['Volume']
+        # c = Company(key, quote.get('1y Target Est'), quote.get('52 Week Range'), quote.get('Ask'),
+        #             quote.get('Avg. Volume'), quote.get('Beta (5Y Monthly)'), quote.get('Bid'),
+        #             quote.get("Day's Range"), quote.get('EPS (TTM)'), quote.get('Earnings Date'),
+        #             quote.get('Ex-Dividend Date'), quote.get('Forward Dividend & Yield'), quote.get('Market Cap'),
+        #             quote.get('Open'), quote.get('PE Ratio (TTM)'), quote.get('Previous Close'), quote.get('Price'),
+        #             quote.get('Volume'))
         # Com.append(c.toJSON())
-        Com.append(c.toJSON())
+        Com.append(c)
         # print(c.toJSON())
-    print(Com[0])
-
-    return jsonify(Com)
+    print(Com)
+    # response = flask.jsonify({"status": "true"})
+    # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
+    response = flask.jsonify(json.dumps(Com))
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
+    # return jsonify(json.dumps(Com))
+    return response
 
 
 class Company:
