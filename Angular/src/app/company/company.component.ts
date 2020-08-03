@@ -10,7 +10,7 @@ import { stringify } from 'querystring';
 })
 export class CompanyComponent implements OnInit {
 
-company:Company[];
+  company:any[] = [];
 
   constructor(private dataservice:DataService,private router: Router) { 
    
@@ -41,9 +41,10 @@ company:Company[];
         // this.company[i]=obj
         console.log(data[i])
         const employeeString = JSON.parse(data[i]);
-        let employee1 =employeeString;
+        // let employee1 =employeeString;
         console.log(employeeString)
-        this.company[i]=employee1
+        console.log(this.company)
+        this.company.push(employeeString);
           
          }
   
@@ -76,7 +77,7 @@ company:Company[];
 //     );
     
 // }
-    savedata(comp:Company)
+    savedata(comp:any)
   {
   
     this.dataservice.saveStock(comp);

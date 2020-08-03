@@ -13,9 +13,9 @@ import json
 import os
 import requests
 import yahoo_fin.stock_info as si
-import requests
+
 import pandas as pd
-import requests
+
 from pprint import pprint
 import json
 import sys
@@ -24,16 +24,18 @@ from pprint import pprint
 import operator
 import itertools
 import numpy
+
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
 conn = MySQLdb.connect(host="localhost", user="root", password="Sallu@1811", db="testdb")
 # demo = '60757d8382080062b8f1f1b626ddec5e'
-demo = 'da1bff6d9e6788fd6e40d5fabf24343a'
+demo = '2f65786ab2da2e81bedf53643b019ecc'
 
 companies = requests.get(f'https://fmpcloud.io/api/v3/stock-screener?exchange=NASDAQ&limit=3859&apikey={demo}')
 companies = companies.json()
 
+global saveduser
 
 @app.route("/loggedin", methods=["POST", 'GET'])
 def login():
@@ -49,13 +51,36 @@ def login():
         return response
     response = flask.jsonify({"status": "true"})
     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
+    # saveduser=username
+    return response
+    # return user
+
+@app.route("/stock", methods=["POST", 'GET'])
+def stock():
+    data = request.get_json()
+    saveduser=request.args.get('username')
+    # username = request.args.get()
+    # password = request.args.get('password')
+    
+    cursor = conn.cursor()
+    query = "insert into companytab(username,symbol,marketcap,currentprice) values('"+saveduser+"','"+str(data['symbol'])+"','"+str(data['MarketCap'])+"','"+str(data['QuotePrice'])+"')"
+    print(query)
+    cursor.execute(query)
+    # user = cursor.fetchone()
+    # if user is None:
+    #     response = flask.jsonify({"status": "false"})
+    #     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
+    #     return response
+    print(data)
+    response = flask.jsonify({"status": "true"})
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
 
     return response
     # return user
 
 
 def filterfunc(symbol):
-    p = requests.get(f"https://fmpcloud.io/api/v3/ratios/" + symbol + "?period=quarter&apikey=da1bff6d9e6788fd6e40d5fabf24343a")
+    p = requests.get(f"https://fmpcloud.io/api/v3/ratios/" + symbol + "?period=quarter&apikey=2f65786ab2da2e81bedf53643b019ecc")
     p = p.json()
 
     if len(p)!=0:

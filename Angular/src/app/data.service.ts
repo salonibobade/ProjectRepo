@@ -74,7 +74,7 @@ export class DataService {
     console.log("Username will save stocks  "+this.getUsername());
     
     //  console.log( "received  user "+comp.userName);
-    return this.http.post('http://localhost:8080/user-portal/stocks', comp,httpOptions).subscribe(data => {
+    return this.http.post(this.userUrl+'/stock?username='+this.username, comp,httpOptions).subscribe(data => {
      if (data) {
          
      

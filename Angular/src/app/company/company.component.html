@@ -1,89 +1,80 @@
-
 <body>
-  <div class="col-4"  *ngFor="let  comp of company"> 
-	<div class="card">
-		<div>
-	{{comp.Ask}} <br>
-	{{comp.Bid}}
-<!-- <span>
-	{{comp.Bid}} <br>
-	{{comp.EPS}}
-</span>
-			<div class="column">
-		  	 <span style="font-weight:bold; font-size: 30px	">{{comp.symbol}}</span>
-		  	 <h3>{{comp.symbol}} </h3>
-			</div>
-			<div class="column">
-			  <span>{{comp.oneyTarget}}  </span>
-        <h3 style="color: #5BC446">{{comp.Week52Range}}   {{comp.Ask}}</h3>
-			</div>
-			<div class="column">
-			  <button  class="button" (click)="savedata(comp)" ><span>Save</span></button>
-			</div> -->
+	<div class="col-4"  *ngFor="let  comp of company"> 
+		<div class="column">
+			<button  class="button" (click)="savedata(comp)" ><span>Save</span></button>
 		</div>
-		
-		<!-- <div>
-			<span style="color: #BBB5B3">_______________________________________________________________________________________________________________________________________________________________________</span>
+	  <div class="card">
+		  <div>
+			  <div class="column">
+				 <span style="font-weight:bold; font-size: 30px	">{{comp.companyName}}</span>
+				 <h3>{{comp.symbol}} </h3>
+			  </div>
+			{{comp.Earning}}
+			 
+			   
+			
+		  </div>
+		  
+		  <div>
+			  <span style="color: #BBB5B3">_______________________________________________________________________________________________________________________________________________________________________</span>
+		  </div>
+		  <div>
+			  <div class="column1">
+				  <span>One Year Target</span>
+				  <h3>{{comp.oneytarget}}</h3>
 		</div>
-		<div>
-			<div class="column1">
-				<span>MarketCapValue</span>
-			    <h3>{{comp.marketCap}}</h3>
-      </div>
-      <div class="column1">
-          <span>Sector</span>
-            <h3>{{comp.sector}}</h3>
-        </div>
-        <div class="column1">
-            <span>Primary Exchange</span>
-              <h3>{{comp.primaryExchange}}</h3>
-          </div>
+		<div class="column1">
+			<span>Week 52 change  </span>
+		  		<h3 style="color: #5BC446">{{comp.Week52Range}}</h3>
+		  </div>
+		  <div class="column1">
+			  <span>Ask</span>
+				<h3>{{comp.Ask}}</h3>
+			</div>
+			  <div class="column1">
+				  <span>Average Volume</span>
+				  <h3>{{comp.AvgVolume}}</h3>
+			  </div>
+			
+			  <div class="column1">
+				<span>Quote Price</span>
+				<h3>{{comp.QuotePrice}}</h3>
+			</div>
+		  </div>	
+		  <div>
+			  <div class="column1">
+				  <span>Earning per Sales</span>
+				  <h3>{{comp.EPS}}</h3>
+		</div>
+		<div class="column1">
+			<span>Volume</span>
+			  <h3>{{comp.Volume}}</h3>
+		  </div>
+		  <div class="column1">
+			  <span>MarketCap</span>
+				<h3>{{comp.MarketCap}}</h3>
+			</div>
 			<div class="column1">
 				<span>Open</span>
-			    <h3>{{comp.open}}</h3>
+				<h3>{{comp.Open}}</h3>
 			</div>
-			<div class="column1">
-				<span>High</span>
-			    <h3>{{comp.high}}</h3>
-			</div>
-			<div class="column1">
-				<span>Low</span>
-			    <h3>{{comp.low}}</h3>
-			</div>
-		</div>	
-		<div>
-			<div class="column1">
-				<span>Close</span>
-			    <h3>{{comp.close}}</h3>
-      </div>
-      <div class="column1">
-          <span>Volume</span>
-            <h3>{{comp.latestVolume}}</h3>
-        </div>
-        <div class="column1">
-            <span>LatestTime</span>
-              <h3>{{comp.latestTime}}</h3>
-          </div>
-			<div class="column1">
-				<span>Previous Close</span>
-			    <h3>{{comp.previousClose}}</h3>
-			</div>
-			<div class="column1">
-				<span>week52Low</span>
-			    <h3>{{comp.week52Low}}</h3>
-			</div>
-			<div class="column1">
-				<span>week52High</span>
-			    <h3>{{comp.week52High}}</h3>
-			</div>
-		</div>	
-		<div>
-			<span style="color:#BBB5B3 ">_________________________________________________________________________________________________________________________________________________________________________________________________________</span>
-		</div> -->
-	</div>
-</div>
-<div class="description ">
-<button class="button"   (click)="onClick()"   >Logout</button>
-</div>
-
-</body>
+			  <div class="column1">
+				  <span>Previous Close</span>
+				  <h3>{{comp.PreviousClose}}</h3>
+			  </div>
+			 
+			  <div class="column1">
+				  <span>PE Ratio</span>
+				  <h3>{{comp.PERatio}}</h3>
+			  </div>
+		  </div>	
+		  <div>
+			  <span style="color:#BBB5B3 ">_________________________________________________________________________________________________________________________________________________________________________________________________________</span>
+		  </div>
+	  </div>
+  </div>
+  <div class="description ">
+  <button class="button"   (click)="onClick()"   >Logout</button>
+  </div>
+  
+  </body>
