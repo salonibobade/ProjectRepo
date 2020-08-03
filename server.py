@@ -25,12 +25,13 @@ import operator
 import itertools
 import numpy
 
+
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
 conn = MySQLdb.connect(host="localhost", user="root", password="Sallu@1811", db="testdb")
 # demo = '60757d8382080062b8f1f1b626ddec5e'
-demo = '2f65786ab2da2e81bedf53643b019ecc'
+demo = 'fe00ff52f26aa030c2e607e923450b16'
 
 companies = requests.get(f'https://fmpcloud.io/api/v3/stock-screener?exchange=NASDAQ&limit=3859&apikey={demo}')
 companies = companies.json()
@@ -79,8 +80,46 @@ def stock():
     # return user
 
 
+
+@app.route("/showCompany", methods=["POST", 'GET'])
+def showcompany():
+    uname=request.args.get('username')
+    sql_select_Query = "select * from companytab where username='"+uname+"'"
+    cursor = conn.cursor()
+    print(sql_select_Query)
+    cursor.execute(sql_select_Query)
+    records = cursor.fetchall()
+    List=[]
+    for row in records:
+        id= int
+        un=str
+        symbol = str
+        MarketCap = str
+        CurrentPrice = str
+        
+        quantity= int        
+        d={}
+        d['id']=row[0]
+        d['un']=row[1]
+        d['symbol']=row[2]
+        d['MarketCap']=row[3]
+        d['CurrentPrice']=row[4]        
+        d['quantity']=row[5]
+        List.append(json.dumps(d))
+    
+    response = flask.jsonify(List)
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
+    # return jsonify(json.dumps(Com))
+    return response
+        
+
+
+
+
+
+
 def filterfunc(symbol):
-    p = requests.get(f"https://fmpcloud.io/api/v3/ratios/" + symbol + "?period=quarter&apikey=2f65786ab2da2e81bedf53643b019ecc")
+    p = requests.get(f"https://fmpcloud.io/api/v3/ratios/" + symbol + "?period=quarter&apikey=fe00ff52f26aa030c2e607e923450b16")
     p = p.json()
 
     if len(p)!=0:
@@ -100,6 +139,11 @@ def filterfunc(symbol):
         return count
     else:
         return 0
+
+
+
+
+
 
 @app.route("/stockMarket", methods=["POST", 'GET'])
 def get():
@@ -231,7 +275,7 @@ def get():
         if str(quote['Quote Price'])=='nan':
             c['QuotePrice']=""
         else:
-            c['QuotePrice']=quote['Quote Price']
+            c['QuotePrice']=round(quote['Quote Price'],3)
         if str(quote['Volume'])=='nan':
             c['Volume']=""
         else:

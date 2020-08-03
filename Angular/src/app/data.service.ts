@@ -19,7 +19,7 @@ export class DataService {
   private baseUrl;
   authenticated = false;
   marketCap:string;
-  username:string="muskan"
+  username:string="Aish11"
   data:string[]
   constructor(private http: HttpClient,private router: Router) { }
   setOption(value) { 
@@ -62,7 +62,12 @@ export class DataService {
     this.username = value;  
   }  
   
+  getcompanies()
+ {
+  console.log("Username will save stocks  "+this.getUsername());
+  return this.http.get<String[]>(this.userUrl+'/showCompany?username='+this.username);
   
+ }
   getStocks()//: Observable<string[]>
   {
     
@@ -87,13 +92,7 @@ export class DataService {
    }) ;
    
  }
- getcompanies()
- {
-  console.log("Username retrive from spring  "+this.getUsername());
-  
-  return this.http.get<Company[]>(`${this.baseUrl}/${this.username}`);
-  
- }
+ 
 //  deleteStock(comp:Company) {
 //   console.log("got this "+comp.userName);
 //   console.log("Username will delete stocks  "+this.getUsername());

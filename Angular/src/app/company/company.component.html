@@ -1,80 +1,75 @@
-<body>
-	<div class="col-4"  *ngFor="let  comp of company"> 
-		<div class="column">
-			<button  class="button" (click)="savedata(comp)" ><span>Save</span></button>
-		</div>
-	  <div class="card">
-		  <div>
-			  <div class="column">
-				 <span style="font-weight:bold; font-size: 30px	">{{comp.companyName}}</span>
-				 <h3>{{comp.symbol}} </h3>
-			  </div>
-			{{comp.Earning}}
-			 
-			   
-			
-		  </div>
-		  
-		  <div>
-			  <span style="color: #BBB5B3">_______________________________________________________________________________________________________________________________________________________________________</span>
-		  </div>
-		  <div>
-			  <div class="column1">
-				  <span>One Year Target</span>
-				  <h3>{{comp.oneytarget}}</h3>
-		</div>
-		<div class="column1">
-			<span>Week 52 change  </span>
-		  		<h3 style="color: #5BC446">{{comp.Week52Range}}</h3>
-		  </div>
-		  <div class="column1">
-			  <span>Ask</span>
-				<h3>{{comp.Ask}}</h3>
-			</div>
-			  <div class="column1">
-				  <span>Average Volume</span>
-				  <h3>{{comp.AvgVolume}}</h3>
-			  </div>
-			
-			  <div class="column1">
-				<span>Quote Price</span>
-				<h3>{{comp.QuotePrice}}</h3>
-			</div>
-		  </div>	
-		  <div>
-			  <div class="column1">
-				  <span>Earning per Sales</span>
-				  <h3>{{comp.EPS}}</h3>
-		</div>
-		<div class="column1">
-			<span>Volume</span>
-			  <h3>{{comp.Volume}}</h3>
-		  </div>
-		  <div class="column1">
-			  <span>MarketCap</span>
-				<h3>{{comp.MarketCap}}</h3>
-			</div>
-			<div class="column1">
-				<span>Open</span>
-				<h3>{{comp.Open}}</h3>
-			</div>
-			  <div class="column1">
-				  <span>Previous Close</span>
-				  <h3>{{comp.PreviousClose}}</h3>
-			  </div>
-			 
-			  <div class="column1">
-				  <span>PE Ratio</span>
-				  <h3>{{comp.PERatio}}</h3>
-			  </div>
-		  </div>	
-		  <div>
-			  <span style="color:#BBB5B3 ">_________________________________________________________________________________________________________________________________________________________________________________________________________</span>
-		  </div>
-	  </div>
-  </div>
-  <div class="description ">
-  <button class="button"   (click)="onClick()"   >Logout</button>
-  </div>
-  
-  </body>
+
+  <style>
+	table {
+  border:1px solid #2E86C1;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+ 
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 15px;
+}
+
+tr:nth-child(even) {
+  background-color:  #C1E1F5  ;
+}
+
+thead{
+text-align:center;
+}
+button{
+cursor: pointer;
+padding: 10px 20px;
+display: inline-block;
+text-align:center;
+background-color:#099AF7;
+
+ color: white;
+}
+.len
+{
+	width: 70%;
+	margin-left: 15%;
+}
+
+</style>
+<div class="len" style="background-image: url('C:\Users\Bobde\Desktop\Assignment\Angular\src\assets\stock3.jpg');">
+<table>
+	<tr>
+		<th>Symbol</th>
+		<th>One Year Target</th>
+		<th>52 Week Change</th>
+		<th>Ask</th>
+		<th>Average Volume</th>
+		<th>Current Price</th>
+		<th>Earning per sales</th>
+		<th>Volume</th>
+		<th>Marketcap</th>
+		 <th>Open</th>
+		 <th>Previous Close</th>
+		 <th>PE ratio</th>
+		 <th></th>
+	</tr>
+	<tr *ngFor="let  comp of company">
+		<td>{{ comp.symbol }}</td>
+		<td>{{comp.oneytarget}}</td>
+		<td>{{comp.Week52Range}}</td>
+		<td>{{comp.Ask}}</td>
+		<td>{{comp.AvgVolume}}</td>
+		<td>{{comp.CurrentPrice}}</td>
+		<td>{{comp.EPS}}</td>
+		<td>{{comp.Volume}}</td>
+		<td>{{ comp.MarketCap}}</td>
+		<td>{{comp.Open}}</td>
+		<td>{{comp.PreviousClose}}</td>
+		<td>{{comp.PERatio}}</td>
+		<td><button type="button" (click)="savedata(comp)" >Save Stocks</button>  </td>
+		
+	
+	</tr>
+  </table>
+</div>
