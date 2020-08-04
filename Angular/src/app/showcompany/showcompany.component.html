@@ -16,6 +16,10 @@ td, th {
 tr:nth-child(even) {
   background-color:  #C1E1F5  ;
 }
+tr:nth-child(odd) {
+  background-color:  #EDF4F9
+ ;
+}
 
 thead{
 text-align:center;
@@ -34,15 +38,22 @@ background-color:#099AF7;
 	width: 70%;
 	margin-left: 15%;
 }
-#img
+.img
 {
-	background-image: url('C:\Users\Bobde\Desktop\Assignment\Angular\src\assets\stock3.jpg');
+
+	height:40em; background-size:cover; width:auto;
+     background:url('C:\Users\Bobde\Desktop\Assignment\Angular\src\assets\stock3.jpg');
+     background-position:50% 50%;
+
+
   
 }
 
 </style>
-<div class="len" >
-<table>
+
+<div class="bg">
+	<br><br> <br><br><br>
+<table class="len">
 	<tr>
 		<th>Symbol</th>
 		<th>Marketcap</th>
@@ -60,3 +71,5 @@ background-color:#099AF7;
 	</tr>
   </table>
 </div>
+
+

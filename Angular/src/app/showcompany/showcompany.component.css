@@ -56,3 +56,28 @@ h3{
     color: #BBB5B3;  
     margin-top: 0px;
 }
+.cont
+{
+	background-image: url('/assets\stock2.jpg');
+  
+  /* Full height */
+  height: 670px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.bg {
+  /* The image used */
+  background-image: url('C:\Users\Bobde\Desktop\Assignment\Angular\src\assets\stock2.jpg');
+
+  /* Full height */
+  height: 720px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

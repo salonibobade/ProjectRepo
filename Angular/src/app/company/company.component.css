@@ -57,4 +57,15 @@
   {
     background-color: #C8CDC7  ;
   }
- 
+  .bg {
+    /* The image used */
+    background-image: url('C:\Users\Bobde\Desktop\Assignment\Angular\src\assets\stock2.jpg');
+  
+    /* Full height */
+    height: 710px;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
